@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        vector<int> answer;
+        int count=0;
+
+        for(auto ele : nums){
+            if(ele!=val){
+                answer.push_back(ele);
+
+            }
+            else{
+                count++;
+
+            }
+        }
+        int s = nums.size()-count;
+        while(count!=0){
+            // answer.push_back(_);
+            count--;
+        }
+        nums=answer;
+
+        return s;
+    }
+};
