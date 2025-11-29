@@ -1,0 +1,12 @@
+int countResponseTimeRegressions(int responseTimes_count, int* responseTimes) {
+    long long  sum=responseTimes[0];
+    double avg= responseTimes[0];
+    int count=0;
+    for(int i=1;i<responseTimes_count;i++){
+        if(responseTimes[i]>avg) count ++;
+        sum=sum+responseTimes[i];
+        avg=(double)sum/(i+1);
+    }
+    return count;
+
+}
