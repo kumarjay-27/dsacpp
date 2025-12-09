@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int specialTriplets(vector<int>& nums) {
+        int m=1e9+7;
+        unordered_map<int,int>mp_l;
+        unordered_map<int,int>mp_r;
+
+        int res=0;
+        for(int &num: nums){
+          mp_r[num]++;//add all the value in the right map
+        }
+
+        for(int &num: nums){
+            mp_r[num]--;//as we move to right remove the redduce the frequency from right map
+             int lf= mp_l[num*2];
+             int rg=mp_r[num*2];
+             res=(res+(1LL *lf*rg))%m;
+             mp_l[num]++;
+        }
+        return res;
+        
+        
+    }
+};
