@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int countCoveredBuildings(int n, vector<vector<int>>& buildings) {
+        unordered_map<int,pair<int,int>> xvalue;
+        unordered_map<int,pair<int,int>> yvalue;
+        for(auto &b:buildings){
+            int x=b[0];
+            int y=b[1];
+
+           if(!xvalue.count(x))
+                xvalue[x]={INT_MAX,INT_MIN};
+            if(!yvalue.count(y))
+                yvalue[y]={INT_MAX,INT_MIN};   
+            yvalue[y].first=min(yvalue[y].first,x);
+            yvalue[y].second=max(yvalue[y].second,x);
+
+            xvalue[x].first=min(xvalue[x].first,y);
+            xvalue[x].second=max(xvalue[x].second,y);
+
+        }
+        int result=0;
+        for(auto &b:buildings){
+            int x=b[0];
+            int y=b[1];
+            auto &xr=yvalue[y];
+            auto yr=xvalue[x];
+            if(xr.first<x && x<xr.second && yr.first<y && y<yr.second) result++;
+        }
+        return result;
+    }
+};
