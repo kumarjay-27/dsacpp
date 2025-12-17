@@ -1,0 +1,20 @@
+#define mod 1000000007
+class Solution {
+public:
+    int countPairs(vector<int>& a) {
+        int cnt=0;
+        unordered_map<int, int> mp;
+        for (int i = 0; i < a.size(); i++) {
+            int p = 1;
+            for (int j = 0; j <= 21; j++) {
+                if (mp.find(p - a[i]) != mp.end()) {
+                    cnt += mp[p - a[i]];
+                    cnt = cnt % mod;
+                }
+                p = p * 2;
+            }
+            mp[a[i]]++;
+        }
+        return cnt;
+    }
+};
