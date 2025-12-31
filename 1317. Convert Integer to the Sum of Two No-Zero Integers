@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> getNoZeroIntegers(int n) {
+        vector<int>m;
+        for(int i=1;i<n;i++){
+            int j= n-i;
+            if(!hasZero(i)&&!hasZero(j)){
+                m.push_back(i);
+                m.push_back(j);
+                return m;
+            }
+        }
+        return m;
+    }
+    public:
+    bool hasZero(int x){
+        while(x>0){
+            int k=x%10;
+            if(k==0) return true;
+            x=x/10;
+        }
+        return false;
+    }
+};
