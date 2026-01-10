@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int maxFreqSum(string s) {
+        unordered_map<char,int>fre1;
+        unordered_map<char,int>fre2;
+        for(char x:s){
+            if(x=='a'||x=='e'||x=='i'||x=='o'||x=='u'){
+                fre1[x]++;
+            }
+            else fre2[x]++;
+        }
+        if (fre1.empty()&&fre2.empty()) return 0;   
+        int maxVowel = 0;
+        int maxConsonant = 0;
+        for (auto it : fre1) {
+            maxVowel = max(maxVowel, it.second);
+        }
+        for (auto it : fre2) {
+            maxConsonant = max(maxConsonant, it.second);
+        }
+
+        return maxVowel + maxConsonant;
+
+        
+    }
+};
