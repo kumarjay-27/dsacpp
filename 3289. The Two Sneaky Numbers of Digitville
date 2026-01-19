@@ -1,0 +1,15 @@
+class Solution {
+public:
+    vector<int> getSneakyNumbers(vector<int>& nums) {
+        unordered_map<int,int> fre;
+        vector<int>res;
+        for(int x:nums){
+            fre[x]++;
+        }
+        for(auto val:fre){
+            if(val.second>1) res.push_back(val.first);
+        }
+        return res;
+        
+    }
+};
