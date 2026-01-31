@@ -1,0 +1,13 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        set<char>s;
+        for(char x:letters){
+            s.insert(x);
+        }
+        for(char x:s){
+            if(x>target) return x;
+        }
+        return letters[0];
+    }
+};
