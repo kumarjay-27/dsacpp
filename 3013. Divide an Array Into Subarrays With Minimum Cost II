@@ -1,0 +1,60 @@
+class Solution {
+public:
+    long long minimumCost(vector<int>& nums, int k, int dist) {
+        int n = nums.size();
+        
+        multiset<int> small;
+        multiset<int> large;
+        long long smallSum = 0;
+        
+        for (int i = 1; i <= min(dist + 1, n - 1); i++) {
+            small.insert(nums[i]);
+            smallSum += nums[i];
+        }
+        
+        while (small.size() > k - 1) {
+            auto it = prev(small.end());
+            large.insert(*it);
+            smallSum -= *it;
+            small.erase(it);
+        }
+        
+        long long result = nums[0] + smallSum;
+        
+        for (int right = dist + 2; right < n; right++) {
+            int left = right - dist - 1;
+            
+            if (small.size() < k - 1 || nums[right] < *small.rbegin()) {
+                small.insert(nums[right]);
+                smallSum += nums[right];
+                
+                if (small.size() > k - 1) {
+                    auto it = prev(small.end());
+                    large.insert(*it);
+                    smallSum -= *it;
+                    small.erase(it);
+                }
+            } else {
+                large.insert(nums[right]);
+            }
+            
+            if (small.find(nums[left]) != small.end()) {
+                small.erase(small.find(nums[left]));
+                smallSum -= nums[left];
+                
+                if (!large.empty() && small.size() < k - 1) {
+                    auto it = large.begin();
+                    small.insert(*it);
+                    smallSum += *it;
+                    large.erase(it);
+                }
+            } else {
+                large.erase(large.find(nums[left]));
+            }
+            
+            result = min(result, nums[0] + smallSum);
+        }
+        
+        return result;
+    }
+};
