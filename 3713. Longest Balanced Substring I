@@ -1,0 +1,29 @@
+class Solution {
+public:
+bool checkbalance(vector<int>& fre){
+    int common=0;
+    for(int i=0;i<26;i++){
+        if(fre[i]==0) continue;
+        if(common==0) common=fre[i];
+        else if(fre[i]!= common) return false;
+
+    }
+    return true;
+
+}
+    int longestBalanced(string s) {
+        int n= s.length();
+        int maxl=0;
+        for(int i= 0;i<n;i++){
+            vector<int>fre(26,0);
+            for(int j=i;j<n;j++){
+                fre[s[j]-'a']++;
+
+                if(checkbalance(fre)){
+                    maxl= max(maxl,j-i+1);
+                }
+            }
+        }
+        return maxl;
+    }
+};
