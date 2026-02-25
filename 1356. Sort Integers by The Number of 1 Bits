@@ -1,0 +1,13 @@
+class Solution {
+public:
+static bool check(int a, int b){
+    int CA =__builtin_popcount(a);
+    int CB =__builtin_popcount(b);
+    if(CA==CB) return a<b;
+    return CA<CB;
+}
+    vector<int> sortByBits(vector<int>& arr) {
+        sort(arr.begin(),arr.end(),check);
+        return arr;
+    }
+};
