@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> getBiggestThree(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        set<int> st;
+
+        auto addToSet = [&](int val) {
+            st.insert(val);
+            if (st.size() > 3)
+                st.erase(begin(st));
+        };
+
+        for (int a = 0; a < m; a++) {
+            for (int b = 0; b < n; b++) {
+
+                addToSet(grid[a][b]); 
+
+                for (int side = 1; a-side >= 0 && a+side < m && b-side >= 0 && b+side < n; side++) {
+
+                    int sum = 0;
+
+                    for (int k = 0; k < side; k++) {
+                        sum += grid[a - side + k][b + k];   
+                        sum += grid[a + k][b + side - k];   
+                        sum += grid[a + side - k][b - k];   
+                        sum += grid[a - k][b - side + k];   
+                    }
+
+                    addToSet(sum);
+                }
+            }
+        }
+
+        return vector<int>(rbegin(st), rend(st));
+    }
+};
+
