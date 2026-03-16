@@ -1,0 +1,17 @@
+class Solution {
+public:
+int check(string t){
+    int count =0;
+    for(char c:t){
+        c = tolower(c);
+        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') count++;
+    }
+    return count;
+}
+    bool halvesAreAlike(string s) {
+    int n = s.length();
+    int first = check(s.substr(0, n/2));
+    int sec = check(s.substr(n/2, n/2));
+    return(first==sec);
+    }
+};
