@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int m, n;
+    vector<int> shiftleft(vector<int> row) {
+        int a = row[0];
+
+        for (int i = 0; i < row.size() - 1; i++) {
+            row[i] = row[i + 1];
+        }
+
+        row[n - 1] = a;
+        return row;
+    }
+
+    vector<int> shiftright(vector<int> row) {
+        int a = row[n - 1];
+
+        for (int i = n - 1; i > 0; i--) {
+            row[i] = row[i - 1];
+        }
+
+        row[0] = a;
+        return row;
+    }
+    bool areSimilar(vector<vector<int>>& mat, int k) {
+        vector<vector<int>> omat = mat;
+        m = mat.size();
+        n = mat[0].size();
+
+        k = k % n;
+        int count = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int t = 0; t < k; t++) {
+                if (i % 2 == 0) {
+                    mat[i] = shiftleft(mat[i]);
+                } else {
+                    mat[i] = shiftright(mat[i]);
+                }
+            }
+        }
+
+        return omat == mat;
+    }
+};
