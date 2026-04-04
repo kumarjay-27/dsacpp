@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int ct=0;
+        for(int i=s.length()-1;i>=0;i--){
+            if(s[i]==' '&& ct>0) return ct;
+            else if (s[i]==' '&& ct==0) continue;
+            else ct++;
+        }
+        return ct;
+    }
+};
