@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int maximum = 0;
+    int x = 0;
+    int y = 0;
+    int index = 0;
+
+    // N, E, S, W
+    vector<pair<int,int>> dirs{{0,1},{1,0},{0,-1},{-1,0}};
+
+    int robotSim(vector<int>& commands, vector<vector<int>>& obstacles) {
+
+        set<pair<int,int>> seen;
+        for(auto &ele : obstacles){
+            seen.insert({ele[0], ele[1]});
+        }
+
+        for(auto ele : commands){
+
+            if(ele == -1){ 
+                index = (index + 1) % 4;
+            }
+            else if(ele == -2){ 
+                index = (index + 3) % 4;
+            }
+            else{
+                for(int i = 0; i < ele; i++){
+                    int nx = x + dirs[index].first;
+                    int ny = y + dirs[index].second;
+
+                    if(seen.count({nx, ny})) break;
+
+                    x = nx;
+                    y = ny;
+
+                    maximum = max(maximum, x*x + y*y);
+                }
+            }
+        }
+
+        return maximum;
+    }
+};
