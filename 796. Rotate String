@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        string st=s+s;
+        if(s.length()!=goal.length()) return false;
+        int j=0,i=0;
+        while(j<st.length() && i<goal.length()){// brute 
+            if(goal[i]==st[j]){
+                i++;
+                j++;
+                if(i==goal.length()) return true;
+            }
+            else {
+                if (i>0){
+                    j= j-i+1;
+                    i=0;
+                    }
+                else j++;
+            }
+        }
+       
+        return false;
+    }
+};
