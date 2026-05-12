@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans;
+        stringstream ss(s);//convert the string into stream
+        string word;
+
+        while(ss>>word){ //ss is working as cin
+            ans = word+" "+ans;
+        }
+        ans.pop_back();
+        return ans;
+    }
+};
+
