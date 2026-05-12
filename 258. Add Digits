@@ -1,0 +1,16 @@
+class Solution {
+public:
+int helper(int n){
+    if(n>=0 && n<=9) return n;
+    int a=0;
+    while(n>0){
+        a=a+n%10;
+        n/=10;
+    }
+    return helper(a);
+
+}
+    int addDigits(int num) {
+       return helper(num);
+    }
+};
