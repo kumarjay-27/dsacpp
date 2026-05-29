@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int getLucky(string s, int k) {
+        string numst="";
+        for(char ch:s){
+            numst+= to_string(ch-'a'+1);
+        }
+        while(k--){
+            int sum=0;
+            for (char digit : numst) {
+                sum += digit - '0';
+            }
+            numst = to_string(sum);
+        }
+
+        return stoi(numst);
+    }
+};
