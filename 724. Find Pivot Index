@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int total=0;
+        for(int x:nums) total+=x;
+        int leftS=0;
+        for(int i=0;i<nums.size();i++){
+            if(leftS==total-leftS-nums[i]) return i;
+            leftS+=nums[i];
+        }
+        return -1;
+    }
+};
