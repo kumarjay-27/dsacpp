@@ -1,0 +1,9 @@
+class Solution {
+public:
+    double angleClock(int hour, int minutes) {
+        double hhand= 30.0* hour + 0.5* minutes;
+        double mhand= 6.0* minutes;
+        double anglediff = abs(hhand-mhand);
+        return min(anglediff, 360 -anglediff);
+    }
+};
