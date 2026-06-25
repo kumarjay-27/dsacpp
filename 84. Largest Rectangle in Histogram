@@ -1,0 +1,43 @@
+class Solution {
+    vector<int>leftmin(vector<int>&arr){
+        int n=arr.size();
+        stack<int>st;
+        vector<int>left(n);
+        for(int i=0;i<n;i++)
+        {
+            while(!st.empty() && arr[st.top()]>=arr[i]){
+                st.pop();
+            }
+            left[i]=st.empty()?-1:st.top();
+            st.push(i);
+        }
+        return left;
+    }
+    vector<int>rightmin(vector<int>&arr){
+        int n=arr.size();
+        stack<int>st;
+        vector<int>right(n);
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.empty() && arr[st.top()]>=arr[i]){
+                st.pop();
+            }
+            right[i]=st.empty()?n:st.top();
+            st.push(i);
+        }
+        return right;
+    }
+public:
+    int largestRectangleArea(vector<int>& arr){
+        int n=arr.size();
+        int res=0;
+        vector<int>left=leftmin(arr);
+        vector<int>right=rightmin(arr);
+        for(int i=0;i<n;i++){
+            int width=right[i]-left[i]-1;
+            int area=width*arr[i];
+            res=max(area,res);
+        }
+        return res;
+    }
+};
