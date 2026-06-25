@@ -1,0 +1,16 @@
+class Solution {
+    vector<int>arr;
+public:
+    Solution(ListNode* head) {
+        while(head){
+            arr.push_back(head->val);
+            head=head->next;
+        }
+    }
+    
+    int getRandom() {
+        int n= arr.size();
+        int randindex= rand()%n;
+        return arr[randindex];
+    }
+};
