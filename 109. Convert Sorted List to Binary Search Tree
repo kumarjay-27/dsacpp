@@ -1,0 +1,19 @@
+class Solution {
+    TreeNode *binarysearch(vector<int>&arr,int low,int high){
+        if(low>high) return nullptr;
+        int mid=(low+high)/2;
+        TreeNode *root= new TreeNode (arr[mid]);
+        root->left=binarysearch(arr,low,mid-1);
+        root->right=binarysearch(arr,mid+1,high);
+        return root;
+    }
+public:
+    TreeNode* sortedListToBST(ListNode* head) {
+        vector<int>arr;
+        while(head){
+            arr.push_back(head->val);
+            head=head->next;
+        }
+       return binarysearch(arr,0,arr.size()-1);
+    }
+};
