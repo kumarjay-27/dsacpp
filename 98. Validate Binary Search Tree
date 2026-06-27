@@ -1,0 +1,13 @@
+class Solution {
+    bool validate(TreeNode *node,TreeNode *minnode,TreeNode *maxnode){
+        if(!node) return true;
+        if(minnode && node->val <= minnode->val) return false;
+        if(maxnode && node->val >= maxnode->val) return false;
+        return validate(node->left,minnode,node) &&
+        validate(node->right,node,maxnode);
+    }
+public:
+    bool isValidBST(TreeNode* root) {
+       return validate(root,nullptr,nullptr); 
+    }
+};
