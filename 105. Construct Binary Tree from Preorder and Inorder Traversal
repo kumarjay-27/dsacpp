@@ -1,0 +1,19 @@
+class Solution {
+    TreeNode *treebana(unordered_map<int,int>&mp,vector<int> &inorder,int inst,int ined,vector<int> &preorder,int prest,int preed){
+        if(inst>ined || prest>preed) return nullptr;
+        TreeNode * root= new TreeNode(preorder[prest]);
+        int  root_index=mp[root->val];
+        int left_size= root_index-inst;
+        root->left=treebana(mp,inorder,inst,root_index-1,preorder,prest+1,prest+left_size);
+        root->right=treebana(mp,inorder,root_index+1,ined,preorder,prest+left_size+1,preed);
+        return root;
+    }
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        unordered_map<int,int>mp;
+        for(int i=0;i<inorder.size();i++){
+            mp[inorder[i]]=i;
+        }
+        return treebana(mp,inorder,0,inorder.size()-1,preorder,0,preorder.size()-1);
+    }
+};
