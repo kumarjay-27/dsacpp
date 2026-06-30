@@ -1,0 +1,20 @@
+class Solution {
+    void dfs(vector<vector<int>>&graph,int curr,int dest,vector<int>&temp,vector<vector<int>>&ans){
+        temp.push_back(curr);
+        if(curr==dest) ans.push_back(temp);
+        else{
+            for(int i=0;i<graph[curr].size();i++){
+                dfs(graph,graph[curr][i],dest,temp,ans);
+            }
+        }
+        temp.pop_back();//reference of temp is used;
+    }
+public:
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        vector<vector<int>>ans;
+        int n=graph.size();
+        vector<int>temp;
+        dfs(graph,0,n-1,temp,ans);
+        return ans;
+    }
+};
