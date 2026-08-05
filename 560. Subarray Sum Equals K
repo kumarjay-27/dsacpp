@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> prefixSumCounts;
+        prefixSumCounts[0] = 1;
+        int current_sum = 0;
+        int total_subarrays = 0;
+        for (int num : nums) {
+            current_sum += num;
+            if (prefixSumCounts.find(current_sum - k) != prefixSumCounts.end()) {
+                total_subarrays += prefixSumCounts[current_sum - k];
+            }
+            prefixSumCounts[current_sum]++;
+        }
+        return total_subarrays;
+    }
+};
