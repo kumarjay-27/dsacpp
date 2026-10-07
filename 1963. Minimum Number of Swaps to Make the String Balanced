@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int minSwaps(string s) {
+        int ct=0;
+        for(auto ele :s){
+            if(ele=='['){
+                ct++;
+            }
+            else if(ct>0){
+                ct--;
+            }
+        }
+        return (ct+1)/2;
+    }
+};
